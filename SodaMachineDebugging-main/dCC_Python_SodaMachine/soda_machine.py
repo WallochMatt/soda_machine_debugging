@@ -51,11 +51,11 @@ class SodaMachine:
 
     def calculate_transaction(self, customer_payment, selected_soda, customer):
         total_payment_value = self.calculate_coin_value(customer_payment)#method is defined talking in coins_list
-        if total_payment_value < selected_soda.price:
+        if total_payment_value > selected_soda.price: #flipping this operator
             change_value = self.determine_change_value(total_payment_value, selected_soda.price)
             customer_change = self.gather_change_from_register(change_value)
-            if customer_change is None:
-                user_interface.output_text('Dispensing ${total_payment_value} back to customer')
+            if customer_change is None: 
+                user_interface.output_text(f'Dispensing ${total_payment_value} back to customer')
                 customer.add_coins_to_wallet(customer_payment)
                 self.return_inventory(selected_soda)
             else:
@@ -114,7 +114,7 @@ class SodaMachine:
 
     def determine_change_value(self, total_payment, selected_soda_price):
         """Determines amount of change needed by finding difference of payment amount and can price"""
-        return round(selected_soda_price - total_payment, 2)
+        return round(total_payment - selected_soda_price, 2) 
 
     def calculate_coin_value(self, coins_list):
         """Takes in a list of coins, returns the monetary value of list."""
@@ -131,9 +131,9 @@ class SodaMachine:
                 return can
         #return None
 
-    def return_inventory(chosen_soda, inventory): #added inventory as a parameter
+    def return_inventory(self, chosen_soda): #added inventory as a parameter
         """Re-adds a remove can back to inventory upon unsuccessful purchase attempt"""
-        inventory.append(chosen_soda)
+        self.inventory.append(chosen_soda)
 
     def deposit_coins_into_register(self, coins_list):
         """Takes in list of coins as argument, adds each coin from list to the register"""
