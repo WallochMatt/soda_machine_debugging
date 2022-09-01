@@ -9,9 +9,10 @@ class Simulation:
     def run_simulation(self):
         """The central method called in main.py."""
         customer = Customer()
+        
         soda_machine = SodaMachine()
-        soda_machine.fill_register() #this needs to be put somewhere(as opposed to not at all)
-        soda_machine.fill_inventory()#I added this herer
+        # soda_machine.fill_register() #this needs to be put somewhere(as opposed to not at all)
+        # soda_machine.fill_inventory()#I added this herer
         will_proceed = False
         while will_proceed == False:# == False?
             user_option = user_interface.simulation_main_menu()

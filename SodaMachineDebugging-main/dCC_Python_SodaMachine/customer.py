@@ -12,7 +12,7 @@ class Customer:
         will_proceed = False
         customer_payment = []
         user_interface.output_text("Continue to add coins until you are ready to insert them into the machine")
-        while will_proceed:
+        while will_proceed == False: #previously just will proceed
             user_interface.display_can_cost(selected_soda)
             user_interface.display_payment_value(customer_payment)
             coin_name = user_interface.coin_selection()
@@ -56,7 +56,7 @@ class Customer:
                 coins_quantity[2] += 1 # was [0]
             elif coin.name == "Penny":
                 coins_quantity[3] += 1
-        total_value = round(total_value, -2)
+        total_value = round(total_value, 2) #total value dies here need pos2
         user_interface.display_customer_wallet_info(coins_quantity, total_value)
 
     def check_backpack():

@@ -4,28 +4,32 @@ import coins
 import user_interface #imported user interface to define user_inteface. variable
 class SodaMachine:
     def __init__(self):
-        self.register = []
-        self.inventory = []
+        self.register = self.fill_register()
+        self.inventory = self.fill_inventory()
 
     def fill_register(self):
         """Method will fill SodaMachine's register with certain amounts of each coin when called."""
+        in_register = []
         for index in range(8):
-            self.register.append(coins.Quarter())
+            in_register.append(coins.Quarter())
         for index in range(10):
-            self.register.append(coins.Dime())
+            in_register.append(coins.Dime())
         for index in range(20):
-            self.register.append(coins.Nickel())
+            in_register.append(coins.Nickel())
         for index in range(50):
-            self.register.append(coins.Penny())
+            in_register.append(coins.Penny())
+        return in_register
 
     def fill_inventory(self):
         """Method will fill SodaMachine's cans list with certain amounts of each can when called."""
+        in_inventory = []
         for index in range(10):
-            self.inventory.append(cans.Cola())
+            in_inventory.append(cans.Cola())
         for index in range(10):
-            self.inventory.append(cans.OrangeSoda())
+            in_inventory.append(cans.OrangeSoda())
         for index in range(10):
-            self.inventory.append(cans.RootBeer())
+            in_inventory.append(cans.RootBeer())
+        return in_inventory
 
     def begin_transaction(self, customer):
         """Method is complete. Initiates purchase if user decides to proceed. No errors."""
