@@ -2,16 +2,16 @@ import os
 # This file is meant to be imported as a module, not a class. 
 # This is similar to how the random module is imported.
 # Do not create a User Interface class in this file. 
-
+from cans import Can
 def simulation_main_menu():
     """Main menu prompting user to choose an option"""
     validate_user_selection = (False, None)
     while validate_user_selection[0] is False:
         print("\t\t-Simulation menu-")
-        print("\tPress -0- to begin transaction")
-        print("\tPress -1- to check wallet for coins")
-        print("\tPress -2- to check backpack for cans")
-        print("\tPress -3- to terminate simulation")
+        print("\tPress -1- to begin transaction")
+        print("\tPress -2- to check wallet for coins")
+        print("\tPress -3- to check backpack for cans")
+        print("\tPress -4- to terminate simulation")
         user_input = try_parse_int(input())
         validate_user_selection = validate_main_menu(user_input)
     return validate_user_selection[1]
@@ -30,18 +30,18 @@ def validate_main_menu(user_input):
 
 def display_customer_wallet_info(coins_list, total_value):
     """Takes in a list of ints to display number of coins along with total value of coins."""
-    print('You have {coins_list[0]} Quarters')
-    print('You have {coins_list[1]} Dimes')
-    print('You have {coins_list[2]} Nickels')
-    print('You have {coins_list[3]} Pennies')
-    print('Your wallet\'s total value is {total_value}')
+    print(f'You have {coins_list[0]} Quarters')#added format to print statement
+    print(f'You have {coins_list[1]} Dimes')
+    print(f'You have {coins_list[2]} Nickels')
+    print(f'You have {coins_list[3]} Pennies')
+    print(f'Your wallet\'s total value is {total_value}')
 
 
 def display_welcome():
     """Initial method asking user if they'll make a purchase. No errors."""
     print("\nWelcome to the soda machine.  We only take coins as payment. \n")
     user_response = continue_prompt("Would you like to make a purchase? (y/n):")
-    if user_response:
+    if user_response == True: # was user_response:
         return True
     else:
         print("Please step aside to allow another customer to make a selection")
@@ -50,7 +50,7 @@ def display_welcome():
 
 def output_text(text):
     """User input method that will print to console any string passed in as an argument"""
-    print("text")
+    print(text)#removed string quotations, uses the parameter now
 
 
 def clear_console():
@@ -76,8 +76,8 @@ def soda_selection(inventory):
         print("Please choose from the following options:")
         i = 1
         for can in soda_options:
-            print("\n\tEnter -{i}- for {can} : ${can.price}")
-            i++
+            print(f"\n\tEnter -{i}- for {can.name} : ${can.price}")#need f what is t?
+            i += 1
         user_selection = try_parse_int(input("Selection:"))
         validated_user_selection = validate_coin_choice(user_selection, soda_options)
     return validated_user_selection[1]
@@ -105,7 +105,7 @@ def get_unique_can_names(inventory):
     unique_cans = []
     previous_names = []
     for can in inventory:
-        if can.name in previous_names:
+        if can.name in previous_names: #self.can? not index.
             continue
         else:
             unique_cans.append(can)
@@ -155,8 +155,9 @@ def validate_coin_selection(selection):
     return switcher.get(selection, (False, None))
 
 
-def end_message(soda_name, change_amount):
+def end_message(selected_soda, change_amount): 
     """Closing message displaying name of soda purchased and amount of change returned"""
-    print(f'Enjoy your {soda}')
-    if change_amount >= 0:
+    print_soda_name = selected_soda.name
+    print(f'Enjoy your {print_soda_name}') 
+    if change_amount >= 0:         
         print(f'Dispensing ${change_amount}')

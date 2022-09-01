@@ -33,9 +33,9 @@ class Customer:
                 return coin
         return None
 
-    def add_coins_to_wallet(self, coins_list):
+    def add_coins_to_wallet(self, coins_list): #coins list and coin list, coins list is in the interface so i will change all to coinS_list
         """Method responsible for adding coins from a list into wallet's money list"""
-        for coin in coin_list:
+        for coin in coins_list:
             self.wallet.money.append(coins_list)
 
     def add_can_to_backpack(self, dispensed_can):
@@ -48,14 +48,14 @@ class Customer:
         coins_quantity = [0, 0, 0, 0]
         for coin in self.wallet.money:
             total_value += coin.value
-            if coin.name == "Quarter":
-                coins_quantity[0] += 2
-            elif coin.name == "dime":
+            if coin.name == "Quarter": #should all add one coin, changing to reflect: [0] has += 2, [3] has -1
+                coins_quantity[0] += 1
+            elif coin.name == "Dime":
                 coins_quantity[1] += 1
             elif coin.name == "Nickel":
-                coins_quantity[0] += 1
+                coins_quantity[2] += 1 # was [0]
             elif coin.name == "Penny":
-                coins_quantity[3] -= 1
+                coins_quantity[3] += 1
         total_value = round(total_value, -2)
         user_interface.display_customer_wallet_info(coins_quantity, total_value)
 
