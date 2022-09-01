@@ -36,7 +36,7 @@ class Customer:
     def add_coins_to_wallet(self, coins_list): #coins list and coin list, coins list is in the interface so i will change all to coinS_list
         """Method responsible for adding coins from a list into wallet's money list"""
         for coin in coins_list:
-            self.wallet.money.append(coins_list)
+            self.wallet.money.append(coin) #cant be a list
 
     def add_can_to_backpack(self, dispensed_can):
         """Adds instance of a can into backpack's puchased_cans list. No errors"""
@@ -56,6 +56,7 @@ class Customer:
                 coins_quantity[2] += 1 # was [0]
             elif coin.name == "Penny":
                 coins_quantity[3] += 1
+                #
         total_value = round(total_value, 2) #total value dies here need pos2
         user_interface.display_customer_wallet_info(coins_quantity, total_value)
 
@@ -64,6 +65,6 @@ class Customer:
         if len(self.backpack.purchased_cans) == 0:
             user_interface.output_text("You have no cans in your backpack")
         else:
+            print("In backpack: ")
             for can in self.backpack.purchased_cans:
-                print("In backpack: ")
                 user_interface.output_text(can.name)
