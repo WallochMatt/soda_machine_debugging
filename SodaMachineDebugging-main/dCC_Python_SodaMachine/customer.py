@@ -28,7 +28,7 @@ class Customer:
     def get_wallet_coin(self, coin_name):
         """Method responsible for retrieving a single coin from wallet's money list"""
         for coin in self.wallet.money:
-            if coin.name == coin.name:
+            if coin.name == coin_name:
                 self.wallet.money.remove(coin)
                 return coin
         return None
@@ -47,7 +47,7 @@ class Customer:
         total_value = 0
         coins_quantity = [0, 0, 0, 0]
         for coin in self.wallet.money:
-            total_value += coin.value
+            total_value += coin.value #this crashes if you check wallet after a purchase
             if coin.name == "Quarter": #should all add one coin, changing to reflect: [0] has += 2, [3] has -1
                 coins_quantity[0] += 1
             elif coin.name == "Dime":
@@ -59,10 +59,11 @@ class Customer:
         total_value = round(total_value, 2) #total value dies here need pos2
         user_interface.display_customer_wallet_info(coins_quantity, total_value)
 
-    def check_backpack():
+    def check_backpack(self):
         """Will display the cans contained in purchased_cans list in backpack"""
-        if backpack.purchased_cans.length > 0:
+        if len(self.backpack.purchased_cans) == 0:
             user_interface.output_text("You have no cans in your backpack")
         else:
-            for can in backpack.purchased_cans:
+            for can in self.backpack.purchased_cans:
+                print("In backpack: ")
                 user_interface.output_text(can.name)
